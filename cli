@@ -1,0 +1,1 @@
+java -cp target/scala-2.12/akka-cluster-assembly-1.0.jar Cli

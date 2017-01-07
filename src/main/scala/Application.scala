@@ -8,10 +8,10 @@ import scala.collection.mutable.PriorityQueue
 /**
   * Created by sheh on 05/01/2017.
   */
-class Application(name: String, var nodes: Set[ActorRef]) extends Actor {
+class Application(name: String, interval: Int, var nodes: Set[ActorRef]) extends Actor {
   import ApplicationMsgs._
 
-  var messageSchduler = context.system.scheduler.schedule(1 seconds, 100 milliseconds, self, 'MessageReady)
+  var messageSchduler = context.system.scheduler.schedule(1 seconds, interval milliseconds, self, 'MessageReady)
 
   val r = new scala.util.Random(5)
 

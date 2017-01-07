@@ -38,13 +38,12 @@ object Cli {
     """
       |cluster commands:
       |   ls      - list the cluster nodes
-      |   add n - add `n` nodes to the cluster
-      |   del n - delete `n` nodes from the cluster
-      |   perf [pattern] - print performance of nodes which name starts with `pattern`,
-      |       `perf` command without `pattern` prints performance for each node
+      |   add n   - add `n` nodes to the cluster
+      |   del n   - delete `n` nodes from the cluster
+      |   perf    - print cluster performance
       |   int val - set interval between massages to `val` microseconds
-      |   term - terminate the cluster
-      |   q - quit
+      |   term    - terminate the cluster
+      |   q       - quit
     """.stripMargin
 
   def cli(cluster: ActorRef): Unit = {

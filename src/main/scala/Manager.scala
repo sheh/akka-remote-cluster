@@ -10,13 +10,14 @@ class Manager extends Actor {
   import ClusterCmds._
   private var nodes = Map.empty[String, Node]
   private val randomName = new scala.util.Random
+  private var interval = 100
 
   override def receive: Receive = {
 
     case AddNodeCmd(n) =>
       val names = 1 to n map { _ =>
         val name = randomName.alphanumeric.take(6).mkString
-        nodes += name -> new Node(name, nodes.values.map(_.actorRef).toSet)
+        nodes += name -> new Node(name, interval, nodes.values.map(_.actorRef).toSet)
         name
       }
       sender() ! names.mkString("\n")
@@ -37,7 +38,8 @@ class Manager extends Actor {
         case Failure(ex) => manager ! ex.toString
       }
 
-    case SetIntervalCmd(interval) =>
+    case SetIntervalCmd(newInterval) =>
+      interval = newInterval
       val manager = sender()
       Future.sequence { nodes.values map { _.setInterval(interval) } } onComplete {
         case Success(rets) => manager ! rets.mkString("\n")

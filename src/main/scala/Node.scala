@@ -9,11 +9,11 @@ import scala.concurrent.ExecutionContext.Implicits.global
 /**
   * Created by sheh on 06/01/2017.
   */
-class Node(name: String, nodes: Set[ActorRef]) {
+class Node(name: String, interval: Int, nodes: Set[ActorRef]) {
   import ApplicationMsgs._
   private val config = ConfigFactory.load().getConfig("cluster-node")
   private val system = ActorSystem(name, config)
-  private val appActor = system.actorOf(Props(classOf[Application], name, nodes))
+  private val appActor = system.actorOf(Props(classOf[Application], name, interval, nodes))
   implicit private val timeout = Timeout(1 seconds)
 
   def actorRef = appActor.actorRef
