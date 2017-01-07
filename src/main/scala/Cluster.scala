@@ -10,7 +10,7 @@ import scala.util.{Failure, Success}
 /**
   * Created by sheh on 05/01/2017.
   */
-object RemoteSystem extends App {
+object Cluster extends App {
 
   override def main(args: Array[String]): Unit = {
     val system = ActorSystem("cluster-manager", ConfigFactory.load().getConfig("cluster-manager"))

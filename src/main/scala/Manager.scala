@@ -65,7 +65,7 @@ class Manager extends Actor {
     case TerminateMsg() =>
       Future.sequence { nodes.values map { _.stop() } } onComplete {
         case Success(_) =>
-          sender() ! "terminated"
+          sender() ! "cluster terminated"
           self ! PoisonPill
         case Failure(ex) =>
           sender() ! ex.toString

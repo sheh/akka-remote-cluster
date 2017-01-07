@@ -43,6 +43,7 @@ object Cli {
       |   perf [pattern] - print performance of nodes which name starts with `pattern`,
       |       `perf` command without `pattern` prints performance for each node
       |   int val - set interval between massages to `val` microseconds
+      |   term - terminate the cluster
       |   q - quit
     """.stripMargin
 
@@ -77,6 +78,8 @@ object Cli {
           clusterExe(GetPerformanceCmd(p))
         case Array("int", int) =>
           clusterExe(SetIntervalCmd(int.toInt))
+        case Array("term") =>
+          clusterExe(TerminateMsg())
         case Array("q") =>
           println("quit")
           System.exit(0)
