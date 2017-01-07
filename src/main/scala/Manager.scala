@@ -49,7 +49,8 @@ class Manager extends Actor {
     case GetPerformanceCmd(pattern) =>
       val manager = sender()
       nodes.filterKeys(_.startsWith(pattern)).toList match {
-        case Nil => manager ! s"node '$pattern' not found"
+        case Nil =>
+          manager ! (if (pattern.isEmpty) "no nodes in the cluster, use `add`" else s"node '$pattern' not found")
         case fNodes =>
           Future.sequence(fNodes map { _._2.performance }) onComplete {
             case Success(perfs) =>
