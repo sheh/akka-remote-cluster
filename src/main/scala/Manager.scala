@@ -37,6 +37,8 @@ class Manager extends Actor {
         case Success(names) => manager ! names.mkString("\n")
         case Failure(ex) => manager ! ex.toString
       }
+    case GetIntervalCmd() =>
+      sender() ! interval.toString
 
     case SetIntervalCmd(newInterval) =>
       interval = newInterval

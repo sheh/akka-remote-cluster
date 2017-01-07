@@ -24,6 +24,7 @@ object ClusterCmds {
   case class AddNodeCmd(n: Int) extends ClusterCmd
   case class LsNodeCmd() extends ClusterCmd
   case class DelNodeCmd(n: Int) extends ClusterCmd
+  case class GetIntervalCmd() extends ClusterCmd
   case class SetIntervalCmd(interval: Int) extends ClusterCmd
   case class GetPerformanceCmd(pattern: String) extends ClusterCmd
   case class TerminateMsg() extends ClusterCmd

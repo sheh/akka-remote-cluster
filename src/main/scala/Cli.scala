@@ -41,6 +41,7 @@ object Cli {
       |   add n   - add `n` nodes to the cluster
       |   del n   - delete `n` nodes from the cluster
       |   perf    - print cluster performance
+      |   int     - get current interval between massages
       |   int val - set interval between massages to `val` microseconds
       |   term    - terminate the cluster
       |   q       - quit
@@ -75,6 +76,8 @@ object Cli {
           clusterExe(GetPerformanceCmd(""))
         case Array("perf", p) =>
           clusterExe(GetPerformanceCmd(p))
+        case Array("int") =>
+          clusterExe(GetIntervalCmd())
         case Array("int", int) =>
           clusterExe(SetIntervalCmd(int.toInt))
         case Array("term") =>
